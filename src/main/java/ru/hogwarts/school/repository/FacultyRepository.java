@@ -7,4 +7,6 @@ import java.util.Collection;
 
 public interface FacultyRepository extends JpaRepository<Faculty, Long> {
     Collection<Faculty> findByColor(String searchedColor);
+    Collection<Faculty> findByName(String searchedFacultyName);
+    Faculty findByStudents_Id(Long studentsId);
 }

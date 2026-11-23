@@ -50,11 +50,25 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping(params = {"age", "!min", "!max"})
     //GET http://localhost:8080/student?age=18
     public ResponseEntity<Collection<Student>> getStudentsByAge(@RequestParam String age) {
         Collection<Student> studentCollection = studentService.getStudentsByAge(age);
         return ResponseEntity.ok(studentCollection);
+    }
+
+    @GetMapping(params = {"min","max","!age"})
+    //GET http://localhost:8080/student?min=10&max=20
+    public ResponseEntity<Collection<Student>> getStudentInAgeBetween(@RequestParam Long min, @RequestParam Long max) {
+        Collection<Student> allStudentsInAgeBetween = studentService.getAllStudentInAgeBetween(min,max);
+        return ResponseEntity.ok(allStudentsInAgeBetween);
+    }
+
+    @GetMapping("/faculty/{facultyId}")
+    //GET http://localhost:8080/student/faculty/1
+    public ResponseEntity<Collection<Student>> getStudentsOfFaculty(@PathVariable Long facultyId) {
+        Collection<Student> allStudentsOfFaculty = studentService.findByNameContainingIgnoreCaseOrColorContainingIgnoreCase(facultyId);
+        return ResponseEntity.ok(allStudentsOfFaculty);
     }
 
 }
