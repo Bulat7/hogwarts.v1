@@ -1,0 +1,7 @@
+select * from public.student
+select * from public.student where age::integer > 10 and age::integer < 20
+select * from public.student
+select name from public.student
+select * from public.student where name like '%o%'
+select * from public.student where age::integer < "id"
+select * from public.student order by age asc
